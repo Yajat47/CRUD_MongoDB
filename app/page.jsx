@@ -1,5 +1,4 @@
-import TopicsList from "@/components/TopicsList";
-
-export default function Home() {
-  return <TopicsList />;
+import Home from "@/components/Home";
+export default function Landing() {
+  return <Home />;
 }

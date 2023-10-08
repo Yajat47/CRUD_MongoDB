@@ -1,5 +1,5 @@
 import connectMongoDB from "@/libs/mongodb";
-import Topic from "@/models/topic";
+import Topic from "@/models/batch";
 import { NextResponse } from "next/server";
 
 export async function PUT(request, { params }) {
@@ -10,9 +10,16 @@ export async function PUT(request, { params }) {
   return NextResponse.json({ message: "Topic updated" }, { status: 200 });
 }
 
-export async function GET(request, { params }) {
-  const { id } = params;
+// export async function GET(request, { params }) {
+//   const { id } = params;
+//   await connectMongoDB();
+//   const topic = await Topic.findOne({ _id: id });
+//   return NextResponse.json({ topic }, { status: 200 });
+// }
+
+export async function GET(request) {
+  
   await connectMongoDB();
-  const topic = await Topic.findOne({ _id: id });
+  const info = await Batch.findOne({ _id: id });
   return NextResponse.json({ topic }, { status: 200 });
 }

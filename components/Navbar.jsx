@@ -4,11 +4,11 @@ export default function Navbar() {
   return (
     <nav className="flex justify-between items-center bg-slate-800 px-8 py-3">
       <Link className="text-white font-bold" href={"/"}>
-        GTCoding.
+        Skia Admin 
       </Link>
-      <Link className="bg-white p-2" href={"/addTopic"}>
+      {/* <Link className="bg-white p-2" href={"/addTopic"}>
         Add Topic
-      </Link>
+      </Link> */}
     </nav>
   );
 }
