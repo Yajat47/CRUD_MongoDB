@@ -1,5 +1,9 @@
+'use client'
+
 import React, {useState} from 'react';
 import Axios from "axios";
+
+
 
 
 function Upload({ upimgs2 , setupimgs2 }) {
@@ -41,8 +45,8 @@ function Upload({ upimgs2 , setupimgs2 }) {
 
   return ( 
     <div> 
-         <section> 
-          <form class='m-6 p-4 bg-gray-100 rounded-xl '> 
+         
+          <div class='m-6 p-4 bg-gray-100 rounded-xl '> 
               <h3 class='text-lg font-semibold text-orange-900'> Upload Images</h3>
               <div class='m-4 p-2 border-lg border-orange-950 bg-white  flex justify-center'>
                 <input type="file" 
@@ -52,9 +56,8 @@ function Upload({ upimgs2 , setupimgs2 }) {
              <button class='bg-purple-700 p-2 text-white rounded-xl' onClick = {handleUpload}> Upload File</button>
              <button class='bg-purple-700 p-2 text-white rounded-xl' onClick = {trimurl}> LOG URLS</button>
 
-            </form> 
-         </section>
-         <section className="right-side">
+
+             <div className="right-side">
           <h3 class='m-6 p-4 '>Uploaded Images</h3>
           <div class='flex flex-row'>
           { upimgs.map((i , index)=>(
@@ -63,7 +66,10 @@ function Upload({ upimgs2 , setupimgs2 }) {
           
             }
             </div>
-        </section>
+        </div>
+            </div> 
+         
+        
     </div>
   );
 } 

@@ -3,6 +3,8 @@ import { useState  } from "react";
 import Upload from "./Upload";
 
 
+
+
 const Add = () => {
     
 
@@ -77,9 +79,10 @@ const Add = () => {
 
     return ( 
         <div>
+            
+            <form class="formren" className='mt-8 p-6 text-lg '>
             <div className='text-xl font-bold m-6 p-2 text-purple-700'> Add a new Batch</div>
             <div className='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>Batch Details</div>
-            <form class="formren" className='mt-8 p-6 text-lg '>
                 <div className='flex justify-center '>
                 <label className='text-lg font-medium ' for="upc">Unique Product Code (UPC) :</label>
                 <input className='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="upc" id="upc" onChange={handleChange}  placeholder="UPC"></input>
@@ -112,9 +115,9 @@ const Add = () => {
                 </div>
 
                 
-                <div className='mt-12 flex justify-center '>
+                 <div className='mt-12 flex justify-center '>
                 <Upload upimgs2={upimgs2} setupimgs2={setupimgs2}/>
-                </div>
+                </div> 
                 <br />
 
                 <br />
