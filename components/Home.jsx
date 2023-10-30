@@ -46,12 +46,14 @@ const Home = () => {
  //   console.log(da);
     return ( 
         <div>
-        <div class='text-4xl font-bold text-yellow-800 m-6 '>Home</div>
+        <div class='text-4xl font-bold text-yellow-800 m-6 '>Home - Database</div>
 
         {/* <div><button class='m-4 p-6 flex justify-center bg-purple-300' onClick={(e)=> dashcall()} > DashBoard</button></div> */}
         <div>
-        
-
+        <div className="flex flex-row items-center">
+        <a href="/add" class="ml-8  rounded-xl bg-orange-300 px-4 py-2 hover:bg-gray-100 ">Add Batch</a>
+        <a href="/block/home" class="ml-8  rounded-xl bg-orange-300 px-4 py-2 hover:bg-gray-100 ">Blockchain Portal</a>
+        </div>
           {load == true && 
           <div>
             

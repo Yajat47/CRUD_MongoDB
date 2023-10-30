@@ -1,5 +1,6 @@
-import connectMongoDB from "@/libs/mongodb";
-import Batch from "@/models/batch";
+import connectMongoDB from "libs/mongodb.js";
+import Batch from "models/batch";
+import Block from "models/Block";
 import { NextResponse } from "next/server";
 
 export async function PUT(request) {
@@ -21,4 +22,14 @@ export async function PUT(request) {
 
      });
   return NextResponse.json({ message: "Process Added"  }, { status: 200 });
+}
+
+export async function POST(request) {
+  const {sku , processing } = await request.json();
+  await connectMongoDB();
+  await Block.findOneAndUpdate({
+        sku : parseInt(sku),} ,{
+        processing : processing
+  });
+  return NextResponse.json({ message: "Updated Info " }, { status: 202 });
 }

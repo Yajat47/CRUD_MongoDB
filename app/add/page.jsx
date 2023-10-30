@@ -1,11 +1,15 @@
 "use client";
 
 
-import Add from "@/components/Add";
+import { useEffect , useState } from "react";
+import Add from "components/Add";
 
 const Info = () => {
+  
   return ( 
-    <Add/>
+   
+      
+    <Add/> 
    );
 }
  

@@ -10,7 +10,16 @@ const Roasting = () => {
     
     const [upimgs2 , setupimgs2] =useState([]);
 
-
+    const [au , setau] = useState(false);
+    useEffect(() => {
+      const isAuth = sessionStorage.getItem("user");
+      if(!isAuth){
+        window.location.replace("/");
+      }
+      else {
+        setau(true);
+      }
+    }, []);
 
     const [bdet, setdet] = useState(
         {

@@ -1,18 +1,31 @@
 'use client'
 
-import Upload from 'components/Upload';
-import { useState , useEffect } from 'react';
-const process = () => {
-    // const [isWalletConnected, setIsWalletConnected] = useState(false);
-    // const [customerAddress, setCustomerAddress] = useState();
+import { useState , useEffect  } from "react";
+import abi from "contracts/Coffee2.json";
+import { ethers   } from "ethers";
+import Upload from "components/Upload.jsx";
+
+
+
+const Processing = () => {
+    const [isWalletConnected, setIsWalletConnected] = useState(false);
+    const [customerAddress, setCustomerAddress] = useState();
     const [sku , setsku] = useState(0);
-    // const contractAddress = "0x23F0F7F35d7cdC702E153cbd9cB9C2B1e6AC2068";
-    // const contractAbi = abi.abi;
+    const contractAddress = "0x23F0F7F35d7cdC702E153cbd9cB9C2B1e6AC2068";
+    const contractAbi = abi.abi;
     
     const [upimgs2 , setupimgs2] =useState([]);
 
     const [au , setau] = useState(false);
-    
+    useEffect(() => {
+      const isAuth = sessionStorage.getItem("user");
+      if(!isAuth){
+        window.location.replace("/");
+      }
+      else {
+        setau(true);
+      }
+    }, []);
 
     const [bdet, setdet] = useState(
         {
@@ -30,31 +43,59 @@ const process = () => {
 
     const checkIfWalletIsConnected = async (e)=> {
       e.preventDefault();
-      
-            
-try {
-    const res = await fetch('http://localhost:3000/api/process', {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({sku , bdet , upimgs2    }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to Add a batch");
-      }
-
-    //   router.refresh();
-    //   router.push("/");
-    window.alert("SuccessFull");
-        }
-
+        try {
+          if(window.ethereum) {
+            const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
+            const account = accounts[0];
+            setIsWalletConnected(true);
+            setCustomerAddress(account);
 
             
-    
-      
+
+            console.log("Account Connected "+account);
+            console.log(bdet , upimgs2);
+
+            let par = bdet.p_params.split(",");
+            console.log( par);
+
+            const provider = new ethers.BrowserProvider(window.ethereum);
+           // const coffee = new ethers.Contract(contractAddress, contractAbi, provider);
+            const signer = await provider.getSigner();
+            const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+            contract.processing( parseInt(sku), ethers.encodeBytes32String(bdet.p_ptype) ,  par ,  ethers.encodeBytes32String(bdet.p_pulpdate) ,
+            ethers.encodeBytes32String(bdet.p_dtabledate) , ethers.encodeBytes32String(bdet.p_dcompdate) ,ethers.encodeBytes32String(bdet.p_dparams) , ethers.encodeBytes32String(bdet.p_bdate) ,
+            ethers.encodeBytes32String(bdet.p_spackdate) , upimgs2).then(async(data)=> {
+            const res=  await fetch('http://localhost:3000/api/process', {
+                  method: "POST",
+                  headers: {
+                    "Content-type": "application/json",
+                  },
+                  body: JSON.stringify({sku : sku , processing : data.hash   }),
+                });
+                console.log("Sucessfull!!");
+                window.alert("Batch Added Sucessfully !");  
+          });
+            
+          
          
+            
+
+
+
+            
+              
+
+           
+
+
+
+
+          }
+          else {
+          //  window.alert("MetaMask Login Failed");
+            console.log("Metamask FAil");
+          }
+        } 
         catch (err) {
           console.log(err);
         }
@@ -65,16 +106,8 @@ try {
 
 
     useEffect(()=>{
-      const isAuth = sessionStorage.getItem("user");
-      if(!isAuth){
-        window.location.replace("/");
-      }
-      else {
-        setau(true);
-      }
         const params = new URLSearchParams(window.location.search); 
-        setsku((params.get('id')));
-      
+        setsku(parseInt(params.get('id')));
     },[]);
 
     return ( 
@@ -139,4 +172,4 @@ try {
      );
 }
  
-export default process;
+export default Processing;

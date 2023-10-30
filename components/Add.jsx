@@ -1,5 +1,5 @@
 'use client'
-import { useState  } from "react";
+import { useState , useEffect  } from "react";
 import Upload from "./Upload";
 
 
@@ -10,6 +10,16 @@ const Add = () => {
 
     const [upimgs2 , setupimgs2] =useState([]);
 
+    const [au , setau] = useState(false);
+  useEffect(() => {
+    const isAuth = sessionStorage.getItem("user");
+    if(!isAuth){
+      window.location.replace("/");
+    }
+    else {
+      setau(true);
+    }
+  }, []);
 
 
     const [bdet, setdet] = useState(
@@ -79,7 +89,7 @@ const Add = () => {
 
     return ( 
         <div>
-            
+            { au &&
             <form class="formren" className='mt-8 p-6 text-lg '>
             <div className='text-xl font-bold m-6 p-2 text-purple-700'> Add a new Batch</div>
             <div className='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>Batch Details</div>
@@ -125,6 +135,7 @@ const Add = () => {
                 <button className='bg-purple-700 m-6 p-2  w-36 text-lg font-semibold text-white rounded-lg' onClick={(e)=>checkIfWalletIsConnected(e)} >Submit Batch </button>
                 </div>
             </form>
+}
             </div>
         
      );

@@ -5,7 +5,16 @@ import { useState , useEffect } from "react";
 const Packaging = () => {
     
     const [sku , setsku] = useState(0);
-  
+    const [au , setau] = useState(false);
+    useEffect(() => {
+      const isAuth = sessionStorage.getItem("user");
+      if(!isAuth){
+        window.location.replace("/");
+      }
+      else {
+        setau(true);
+      }
+    }, []);
     
   
 

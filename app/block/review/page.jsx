@@ -1,16 +1,17 @@
 'use client'
-
 import { useState , useEffect } from "react";
-import QRCode from "qrcode";
+import abi from "contracts/Coffee2.json";
+import { ethers   } from "ethers";
 
 
 
-
-const Review = () => {
-   
+const BReview = () => {
+    const [isWalletConnected, setIsWalletConnected] = useState(false);
+    const [customerAddress, setCustomerAddress] = useState();
+    const contractAddress = "0x23F0F7F35d7cdC702E153cbd9cB9C2B1e6AC2068";
+    const contractAbi = abi.abi;
 
     const [batches , setbatch] = useState();
-    const [roast , setroast] = useState([]);
     const [load , setload] = useState(false);
     const [sku , setsku] = useState(0);
 
@@ -28,6 +29,7 @@ const Review = () => {
         {
       sku:0,                    // Stock Keeping Unit (SKU)
       upc:"",                  
+     pAdd:"", 
        itemState:"", 
      s_variety :"",
      s_temp :"",
@@ -56,67 +58,84 @@ const Review = () => {
      r_date:"",
      r_degasstime:"",
      r_flavourp:"",
-     r_imgs:[],
+     r_imgs:"",
      m_date:"",
-     brewing:""       
         }
             );
 
     const checkIfWalletIsConnected = async ()=> {
      
         try {
-
+          if(window.ethereum) {
+            const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
+            const account = accounts[0];
+            setIsWalletConnected(true);
+            setCustomerAddress(account);
             const params = new URLSearchParams(window.location.search); 
-            setsku((params.get('id')));
-            let p = params.get('id');
+            setsku(parseInt(params.get('id')));
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            const coffee = new ethers.Contract(contractAddress, contractAbi, provider);
+            const sts = await coffee.getinfo2(parseInt(params.get('id')));
           
-        fetch('http://localhost:3000/api/review', {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ p   }),
-      }).then(res => res.json()).then((data)=> setdet(data))
+          // console.log(sts);
+           let result = Object.keys(sts).map((key) => [sts[key].toString()]);
+          //console.log(result);
+           let state='';
 
-    //   if (!res.ok) {
-    //     throw new Error("Failed ");
-    //   }  
-
-     
-        //     setdet(
-        //         {
-        //             sku:result[0][0],                    // Stock Keeping Unit (SKU)
-        //             upc:ethers.decodeBytes32String(result[1][0]).toString(),                  
-        //            pAdd:result[2][0], 
-        //              itemState:state, 
-        //             s_variety :ethers.decodeBytes32String(result[4][0]).toString(),
-        //            s_temp :ethers.decodeBytes32String(result[5][0]).toString(),
-        //             s_region :ethers.decodeBytes32String(result[6][0]).toString(),
-        //            s_elevation:ethers.decodeBytes32String(result[7][0]).toString(),
-        //            s_flowering:ethers.decodeBytes32String(result[8][0]).toString(),
-        //            s_soiltype :result[9][0],
-        //            s_imgs :result[10].toString().split(","),
-        //            s_date:ethers.decodeBytes32String(result[11][0]).toString(),
-        //            p_ptype:ethers.decodeBytes32String(result[12][0]).toString(),
-        //            p_params:result[13].toString().split(","),
-        //            p_pulpdate:ethers.decodeBytes32String(result[14][0]).toString(),
-        //            p_dtabledate:ethers.decodeBytes32String(result[15][0]).toString(),
-        //            p_dcompdate:ethers.decodeBytes32String(result[16][0]).toString(),
-        //            p_dparams:ethers.decodeBytes32String(result[17][0]).toString(),
-        //            p_bdate:ethers.decodeBytes32String(result[18][0]).toString(),
-        //            p_spackdate:ethers.decodeBytes32String(result[19][0]).toString(),
-        //            p_imgs:result[20].toString().split(","),
-        //            h_resttime:ethers.decodeBytes32String(result[21][0]).toString(),
-        //    // :TODO        h_startdate:ethers.decodeBytes32String(result[22][0]).toString(),
-        //            h_gradesize:ethers.decodeBytes32String(result[23][0]).toString(),
-        //            h_baggingdetails:ethers.decodeBytes32String(result[24][0]).toString(),
-        //            r_date:ethers.decodeBytes32String(result[25][0]),
-        //            r_degasstime:ethers.decodeBytes32String(result[26][0]),
-        //            r_flavourp:ethers.decodeBytes32String(result[27][0]),
-        //            r_imgs:result[28].toString().split(","),
-        //            m_date:ethers.decodeBytes32String(result[29][0]),
-        //               }
-        //     );
+           switch (result[3][0]) {
+            case '0':
+                state='Harvested'
+                break;
+            case '1':
+                    state='Processed'
+                    break;    
+            case '2':
+                        state='Hulling'
+                        break;
+            case '3':
+                            state='Roasted'
+                            break;
+            case '4':
+                        state='Packaged'
+                        break;
+            default:
+                break;
+           }
+            
+            setdet(
+                {
+                    sku:result[0][0],                    // Stock Keeping Unit (SKU)
+                    upc:ethers.decodeBytes32String(result[1][0]).toString(),                  
+                   pAdd:result[2][0], 
+                     itemState:state, 
+                    s_variety :ethers.decodeBytes32String(result[4][0]).toString(),
+                   s_temp :ethers.decodeBytes32String(result[5][0]).toString(),
+                    s_region :ethers.decodeBytes32String(result[6][0]).toString(),
+                   s_elevation:ethers.decodeBytes32String(result[7][0]).toString(),
+                   s_flowering:ethers.decodeBytes32String(result[8][0]).toString(),
+                   s_soiltype :result[9][0],
+                   s_imgs :result[10].toString().split(","),
+                   s_date:ethers.decodeBytes32String(result[11][0]).toString(),
+                   p_ptype:ethers.decodeBytes32String(result[12][0]).toString(),
+                   p_params:result[13].toString().split(","),
+                   p_pulpdate:ethers.decodeBytes32String(result[14][0]).toString(),
+                   p_dtabledate:ethers.decodeBytes32String(result[15][0]).toString(),
+                   p_dcompdate:ethers.decodeBytes32String(result[16][0]).toString(),
+                   p_dparams:ethers.decodeBytes32String(result[17][0]).toString(),
+                   p_bdate:ethers.decodeBytes32String(result[18][0]).toString(),
+                   p_spackdate:ethers.decodeBytes32String(result[19][0]).toString(),
+                   p_imgs:result[20].toString().split(","),
+                   h_resttime:ethers.decodeBytes32String(result[21][0]).toString(),
+           // :TODO        h_startdate:ethers.decodeBytes32String(result[22][0]).toString(),
+                   h_gradesize:ethers.decodeBytes32String(result[23][0]).toString(),
+                   h_baggingdetails:ethers.decodeBytes32String(result[24][0]).toString(),
+                   r_date:ethers.decodeBytes32String(result[25][0]),
+                   r_degasstime:ethers.decodeBytes32String(result[26][0]),
+                   r_flavourp:ethers.decodeBytes32String(result[27][0]),
+                   r_imgs:result[28].toString().split(","),
+                   m_date:ethers.decodeBytes32String(result[29][0]),
+                      }
+            );
 
            // setbatch(sts);
             setload(true);
@@ -127,56 +146,30 @@ const Review = () => {
 
 
 
-          
-          
+          }
+          else {
+          //  window.alert("MetaMask Login Failed");
+            console.log("Metamask FAil");
+          }
         } 
         catch (err) {
           console.log(err);
         }
       }
-
-      let opts = {
-        errorCorrectionLevel: 'H',
-        type: 'image/jpeg',
-        quality: 0.3,
-        margin: 1,
-        color: {
-          dark:"#010599FF",
-          light:"#FFBF60FF"
-        }
-      }
-      
-      
-
-      const generateQR = async text => {
-        try {
-        //  console.log(await QRCode.toDataURL('test'))
-        QRCode.toCanvas('text', { errorCorrectionLevel: 'H' }, function (err, canvas) {
-            if (err) throw err
-          
-            var container = document.getElementById('container')
-            container.appendChild(canvas)
-          })
-        } catch (err) {
-          console.error(err)
-        }
-      }
-     
+      const handleChange = (e) => {
+        setdet(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    }
 
     useEffect(()=>{
-
         checkIfWalletIsConnected();
     },[]);
 
     return ( 
         <div class=''>
             <div class='text-3xl font-bold m-6 p-2 text-purple-700'> Batch Review</div>
-
-            <div id='container'></div>
             {load && 
             <div class='flex flex-col bg-white '>
-            <div class='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>Batch {bdet.sku} : UPC {bdet.upc} </div>
-            <button onClick={()=> generateQR('yes')} class="ml-8 w-fit  rounded-xl bg-orange-300 px-4 py-2 hover:bg-gray-100 "> Generate QR </button> 
+            <div class='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>Batch {bdet.sku} : UPC {bdet.upc} </div> 
             <div class='text-3xl font-bold m-6 p-2 text-yellow-900'> Harvesting</div>   
             <ol class="relative border-l border-gray-200 dark:border-gray-700 shadow-lg border-yellow-900 border-2 p-4 pt-12 pb-12 rounded-xl">                  
                 <li class="mb-10 ml-6">            
@@ -407,7 +400,7 @@ const Review = () => {
 
                 <div class='mt-12 p-4 '>
                 <div  class="grid grid-cols-3 gap-4">
-                {
+                    {
                     bdet.r_imgs.map((i) => (
                         <div key={i}> 
                         <img src={`https://res.cloudinary.com/dypp5dcp7/image/upload/${i}`}></img>
@@ -434,17 +427,6 @@ const Review = () => {
                     Brazil and Columbia are the major producing countries.</p>
 
                 </li>
-
-                <li class="mb-10 ml-6">            
-                    <span class="absolute  flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-                        <svg class="w-2.5 h-2.5 text-yellow-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                        </svg>
-                    </span>
-                    <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">Brewing Techniques <span class=" text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded  ml-3">{bdet.brewing}</span></h3>                   
-                   
-
-                </li>
         </ol>       
 
             </div>
@@ -456,4 +438,4 @@ const Review = () => {
      );
 }
  
-export default Review;
+export default BReview;

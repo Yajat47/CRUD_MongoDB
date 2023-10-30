@@ -1,5 +1,6 @@
-import connectMongoDB from "@/libs/mongodb";
-import Batch from "@/models/batch";
+import connectMongoDB from "libs/mongodb";
+import Batch from "models/batch";
+import Block from "models/block";
 import { NextResponse } from "next/server";
 
 export async function PUT(request) {
@@ -16,4 +17,14 @@ export async function PUT(request) {
 
      });
   return NextResponse.json({ message: "Hulling Added"  }, { status: 200 });
+}
+
+export async function POST(request) {
+  const {sku , hulling } = await request.json();
+  await connectMongoDB();
+  await Block.findOneAndUpdate({
+        sku : parseInt(sku),} ,{
+        hulling : hulling
+  });
+  return NextResponse.json({ message: "Updated Info " }, { status: 202 });
 }
