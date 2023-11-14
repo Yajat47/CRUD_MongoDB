@@ -8,7 +8,7 @@ import { ethers   } from "ethers";
 const BReview = () => {
     const [isWalletConnected, setIsWalletConnected] = useState(false);
     const [customerAddress, setCustomerAddress] = useState();
-    const contractAddress = "0x23F0F7F35d7cdC702E153cbd9cB9C2B1e6AC2068";
+    const contractAddress = "0xa697b155951e42401D3277f5b59540bF2104AEB0";
     const contractAbi = abi.abi;
 
     const [batches , setbatch] = useState();
@@ -236,7 +236,7 @@ const BReview = () => {
                     {
                     bdet.s_imgs.map((i) => (
                         <div key={i}> 
-                        <img src={`https://res.cloudinary.com/dypp5dcp7/image/upload/${i}`}></img>
+                        <img src={`https://res.cloudinary.com/dxbzcfalw/image/upload/${i}`}></img>
                          </div>
                     ))
                     }

@@ -53,6 +53,8 @@ const Home = () => {
         <div className="flex flex-row items-center">
         <a href="/add" class="ml-8  rounded-xl bg-orange-300 px-4 py-2 hover:bg-gray-100 ">Add Batch</a>
         <a href="/block/home" class="ml-8  rounded-xl bg-orange-300 px-4 py-2 hover:bg-gray-100 ">Blockchain Portal</a>
+        <a href="/logout" class="ml-8  rounded-xl bg-orange-300 px-4 py-2 hover:bg-gray-100 ">Logout</a>
+
         </div>
           {load == true && 
           <div>

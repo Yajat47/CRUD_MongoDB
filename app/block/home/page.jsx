@@ -10,8 +10,10 @@ import abi from "contracts/Coffee2.json";
 const Home = () => {
     const [isWalletConnected, setIsWalletConnected] = useState(false);
     const [customerAddress, setCustomerAddress] = useState();
-    const contractAddress = "0x23F0F7F35d7cdC702E153cbd9cB9C2B1e6AC2068";
-    const contractAbi = abi.abi;
+   // const contractAddress = "0x23F0F7F35d7cdC702E153cbd9cB9C2B1e6AC2068";
+  // const contractAddress = "0x2F9D8c62D2f010db89E2514EA094dfC327dac85E"; 
+  const contractAddress = "0xa697b155951e42401D3277f5b59540bF2104AEB0"; 
+   const contractAbi = abi.abi;
     const [batches , setbatch] = useState([]);
     const [load , setload] = useState(false);
     //let navigate = useNavigate();
@@ -55,10 +57,11 @@ const Home = () => {
           //  const signer = provider.getSigner();
             const coffee = new ethers.Contract(contractAddress, contractAbi, provider);
             const sts = await coffee.getstates();
+          //  console.log(sts);
             let result = Object.keys(sts).map((key) => [key, sts[key]]);
             setbatch(result.reverse());
             setload(true);
-            //console.log(result);
+           // console.log(result);
             
           }
         } 
@@ -81,6 +84,8 @@ const Home = () => {
             <div className="flex flex-row items-center">
         <a href="/block/add" class="ml-8  rounded-xl bg-orange-300 px-4 py-2 hover:bg-gray-100 ">Add Batch</a>
         <a href="/" class="ml-8  rounded-xl bg-orange-300 px-4 py-2 hover:bg-gray-100 ">Database Portal</a>
+        <a href="/logout" class="ml-8  rounded-xl bg-orange-300 px-4 py-2 hover:bg-gray-100 ">Logout</a>
+
         </div>
 
               {load == true && 

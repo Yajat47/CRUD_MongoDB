@@ -19,7 +19,7 @@ function Upload({ upimgs2 , setupimgs2 }) {
     formData.append("upload_preset", "skiacoffee");
 
     Axios.post(
-     "https://api.cloudinary.com/v1_1/dypp5dcp7/image/upload",
+     "https://api.cloudinary.com/v1_1/dxbzcfalw/image/upload",
      formData
    )
     .then((response) => {
@@ -54,7 +54,7 @@ function Upload({ upimgs2 , setupimgs2 }) {
               />
               </div>
              <button class='bg-purple-700 p-2 text-white rounded-xl' onClick = {handleUpload}> Upload File</button>
-             <button class='bg-purple-700 p-2 text-white rounded-xl' onClick = {trimurl}> LOG URLS</button>
+             {/* <button class='bg-purple-700 p-2 text-white rounded-xl' onClick = {trimurl}> LOG URLS</button> */}
 
 
              <div className="right-side">
