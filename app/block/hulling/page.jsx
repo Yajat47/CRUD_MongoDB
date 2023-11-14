@@ -59,7 +59,7 @@ const BHulling = () => {
             const contract = new ethers.Contract(contractAddress, contractAbi, signer);
             contract.hulling( parseInt(sku), ethers.encodeBytes32String(bdet.h_resttime) ,  ethers.encodeBytes32String(bdet.h_startdate) ,
             ethers.encodeBytes32String(bdet.h_gradesize) , ethers.encodeBytes32String(bdet.h_baggingdetails)).then(async(data)=> {
-              const res=  await fetch('http://localhost:3000/api/hulling', {
+              const res=  await fetch(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'/api/hulling', {
                     method: "POST",
                     headers: {
                       "Content-type": "application/json",

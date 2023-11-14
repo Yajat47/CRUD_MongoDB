@@ -25,7 +25,7 @@ const Home = () => {
 
     const getdata = async () => {
         try {
-           await axios.get("http://localhost:3000/api/add").then((res)=>{
+           await axios.get(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+"/api/add").then((res)=>{
            // console.log(res.data);
             setbatch(res.data["info"]);
             setload(true);

@@ -33,7 +33,7 @@ const Roasting = () => {
       e.preventDefault();
       setl(true);
         try {
-            const res = await fetch('http://localhost:3000/api/roast', {
+            const res = await fetch(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'/api/roast', {
                 method: "PUT",
                 headers: {
                   "Content-type": "application/json",

@@ -58,7 +58,7 @@ const BRoasting = () => {
             const contract = new ethers.Contract(contractAddress, contractAbi, signer);
         contract.roasting( parseInt(sku), ethers.encodeBytes32String(bdet.r_date) ,  ethers.encodeBytes32String(bdet.r_degasstime) ,
             ethers.encodeBytes32String(bdet.r_flavourp) , upimgs2).then(async(data)=> {
-             const res =  await fetch('http://localhost:3000/api/roast', {
+             const res =  await fetch(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'/api/roast', {
                     method: "POST",
                     headers: {
                       "Content-type": "application/json",

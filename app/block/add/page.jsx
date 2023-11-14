@@ -78,7 +78,7 @@ const BAdd = () => {
         contract.addbatch(ethers.encodeBytes32String(bdet.upc) , account ,  ethers.encodeBytes32String(bdet.s_variety) ,  ethers.encodeBytes32String(bdet.temp) ,
           ethers.encodeBytes32String(bdet.region) , ethers.encodeBytes32String(bdet.elevation) ,  bdet.soil , upimgs2 ,
           ethers.encodeBytes32String(bdet.date) , ethers.encodeBytes32String(bdet.flowering)).then( async (data)=> {
-           const res=  await fetch('http://localhost:3000/api/block', {
+           const res=  await fetch(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'/api/block', {
                 method: "POST",
                 headers: {
                   "Content-type": "application/json",

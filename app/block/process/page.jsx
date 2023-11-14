@@ -66,7 +66,7 @@ const Processing = () => {
             contract.processing( parseInt(sku), ethers.encodeBytes32String(bdet.p_ptype) ,  par ,  ethers.encodeBytes32String(bdet.p_pulpdate) ,
             ethers.encodeBytes32String(bdet.p_dtabledate) , ethers.encodeBytes32String(bdet.p_dcompdate) ,ethers.encodeBytes32String(bdet.p_dparams) , ethers.encodeBytes32String(bdet.p_bdate) ,
             ethers.encodeBytes32String(bdet.p_spackdate) , upimgs2).then(async(data)=> {
-            const res=  await fetch('http://localhost:3000/api/process', {
+            const res=  await fetch(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'/api/process', {
                   method: "POST",
                   headers: {
                     "Content-type": "application/json",

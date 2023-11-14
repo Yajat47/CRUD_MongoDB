@@ -57,7 +57,7 @@ const BPackaging = () => {
             const signer = await provider.getSigner();
             const contract = new ethers.Contract(contractAddress, contractAbi, signer);
              contract.packaging( parseInt(sku), ethers.encodeBytes32String(bdet.p_date)).then(async(data)=> {
-               const res= await fetch('http://localhost:3000/api/package', {
+               const res= await fetch(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'/api/package', {
                     method: "POST",
                     headers: {
                       "Content-type": "application/json",

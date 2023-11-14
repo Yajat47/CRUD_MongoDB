@@ -18,8 +18,9 @@ const Login = ({setauth}) => {
         e.currentTarget.disabled = true;
         try {
 
-          
-        fetch('http://localhost:3000/api/login', {
+       // let url = window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'/api/login';
+      //  console.log(url);
+        fetch(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'/api/login', {
         method: "POST",
         headers: {
           "Content-type": "application/json",

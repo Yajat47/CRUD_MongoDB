@@ -35,7 +35,7 @@ const Hulling = () => {
       e.preventDefault();
       setl(true);
         try {
-            const res = await fetch('http://localhost:3000/api/hulling', {
+            const res = await fetch(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'api/hulling', {
                 method: "PUT",
                 headers: {
                   "Content-type": "application/json",

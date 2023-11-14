@@ -66,7 +66,7 @@ const Batch = () => {
             setsku((params.get('id')));
             let p = params.get('id');
           
-        fetch('http://localhost:3000/api/review', {
+        fetch(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'/api/review', {
         method: "POST",
         headers: {
           "Content-type": "application/json",
