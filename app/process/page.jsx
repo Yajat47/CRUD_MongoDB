@@ -2,7 +2,7 @@
 
 import Upload from 'components/Upload';
 import { useState , useEffect } from 'react';
-const process = () => {
+const Process = () => {
     // const [isWalletConnected, setIsWalletConnected] = useState(false);
     // const [customerAddress, setCustomerAddress] = useState();
     const [sku , setsku] = useState(0);
@@ -153,4 +153,4 @@ try {
      );
 }
  
-export default process;
+export default Process;
