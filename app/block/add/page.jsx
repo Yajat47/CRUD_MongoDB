@@ -4,6 +4,8 @@ import { useEffect, useState  } from "react";
 import abi from "contracts/Coffee2.json";
 import { ethers   } from "ethers";
 import Upload from "components/Upload.jsx"
+import Navbar from "components/Navbar";
+
 
 const BAdd = () => {
     const [isWalletConnected, setIsWalletConnected] = useState(false);
@@ -146,68 +148,79 @@ const BAdd = () => {
 
     return ( 
         <div>
-            <div class='text-xl font-bold m-6 p-2 text-purple-700'> Add a new Batch</div>
-            <div class='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>Batch Details</div>
+          <Navbar/>
+          
             <form className="formren" class='mt-8 p-6 text-lg '>
-                <div class='flex justify-center '>
-                <label class='text-lg font-medium ' for="upc">Unique Product Code (UPC) :</label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="upc" id="upc" onChange={handleChange}  placeholder="UPC"></input>
+            <div class="grid gap-6 mb-6 grid-cols-1">
+               
+               <div className='flex  mb-2 mt-24 text-2xl font-bold text-yellow-900'> 
+               <svg onClick={()=> window.location.replace("/block/home")} class="mr-6 w-6 h-8 text-gray-500 hover:text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 5H1m0 0 4 4M1 5l4-4"></path>
+   </svg> 
+               Add a new Batch</div>
+                <div >
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="upc">Unique Product Code (UPC) :</label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="upc" id="upc" onChange={handleChange}  placeholder="UPC"></input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="s_variety">Fertilizers and Soil Info :
+                <div className="mt-8">
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="s_variety">Fertilizers and Soil Info :
                 </label>
                 {/* <input class='' type="text" name="s_variety" id="s_variety" onChange={handleChange} placeholder=" Variety"></input> */}
                 <div>
-                <span className="h-fit">{count["s_variety"]}</span>
+               
 
       <textarea
         type="text"
         rows={5}
         name="s_variety" id="s_variety"
-        className="ml-6 border-2 border-purple-700 rounded-lg"
+        className="block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"
         onChange={handleChange} 
       />
+       <span className="h-fit pt-4 text-sm font-medium text-gray-500 "> Character count : {count["s_variety"]}</span>
     </div>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="temp">Temperature </label>
+                <div className="mt-8">
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="temp">Temperature </label>
                 <div>
-                <span className="h-fit">{count["temp"]}</span>
+                
 
       <textarea
         type="text"
         rows={5}
         name="temp" id="temp"
-        className="ml-6 border-2 border-purple-700 rounded-lg"
+        className="block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"
         onChange={handleChange} 
       />
+             <span className="h-fit pt-4 text-sm font-medium text-gray-500 "> Character count : {count["temp"]}</span>
+
     </div>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="region">Region / Location </label>
+                <div className="mt-8">
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="region">Region / Location </label>
                 <div>
-                <span className="h-fit">{count["region"]}</span>   
+               
 
       <textarea
         type="text"
         rows={5}
         name="region" id="region"
-        className="ml-6 border-2 border-purple-700 rounded-lg"
+        className="block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"
         onChange={handleChange} 
       />
+             <span className="h-fit pt-4 text-sm font-medium text-gray-500 "> Character count : {count["region"]}</span>
     </div>                </div>
                 
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="planter">Elevation  </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="elevation" id="elevation" onChange={handleChange} placeholder=" Region"></input>
+                <div className="mt-8">
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="planter">Elevation  </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="elevation" id="elevation" onChange={handleChange} placeholder="Elevation"></input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="planter">Harvesting Date  </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="date" name="date" id="date" onChange={handleChange} placeholder=" Harvesting Date"></input>
+                <div className="mt-8">
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="planter">Harvesting Date  </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="date" name="date" id="date" onChange={handleChange} placeholder=" Harvesting Date"></input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="planter">Flowering Date  </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="date" name="flowering" id="flowering" onChange={handleChange} placeholder=" Flowering Date"></input>
+                <div className="mt-8">
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="planter">Flowering Date  </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="date" name="flowering" id="flowering" onChange={handleChange} placeholder=" Flowering Date"></input>
                 </div>
 
                 
@@ -226,8 +239,9 @@ const BAdd = () => {
                 </div>
             </div> }
                 { !isl &&
-                <button className='bg-purple-700 m-6 p-2  w-36 text-lg font-semibold text-white rounded-lg' onClick={(e)=>checkIfWalletIsConnected(e)} >Submit Batch </button>
+                <button className='text-white bg-yellow-900 hover:bg-yellow-800 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-' onClick={(e)=>checkIfWalletIsConnected(e)} >Submit Batch </button>
               }                </div>
+              </div>
             </form>
             </div>
         

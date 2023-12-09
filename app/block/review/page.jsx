@@ -2,6 +2,8 @@
 import { useState , useEffect } from "react";
 import abi from "contracts/Coffee2.json";
 import { ethers   } from "ethers";
+import QRCode from "qrcode";
+import Navbar from "components/Navbar";
 
 
 
@@ -160,16 +162,53 @@ const BReview = () => {
         setdet(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
 
+    function download_image(){
+        var canvas = document.querySelector("canvas");
+        let image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        var link = document.createElement('a');
+        link.download = "SkiaBlockchain-B"+sku.toString()+".png";
+        link.href = image;
+        link.click();
+      }
+
+    const generateQR = async text => {
+        try {
+        //  console.log(await QRCode.toDataURL('test'))
+        const t2 = text.replace("/block","");
+        QRCode.toCanvas(t2.replace("review","track"), { errorCorrectionLevel: 'H' , width : 800 }, function (err, canvas) {
+            if (err) throw err
+          
+            var container = document.getElementById('container2')
+            container.appendChild(canvas)
+    
+          })
+        } catch (err) {
+          console.error(err)
+        }
+      }
+
     useEffect(()=>{
         checkIfWalletIsConnected();
     },[]);
 
     return ( 
         <div class=''>
-            <div class='text-3xl font-bold m-6 p-2 text-purple-700'> Batch Review</div>
+            <Navbar/>
+            <div className='flex  mb-2 mt-24 text-2xl font-bold text-yellow-900'> 
+               <svg onClick={()=> window.location.replace("/block/home")} class="mr-6 w-6 h-8 text-gray-500 hover:text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 5H1m0 0 4 4M1 5l4-4"></path>
+   </svg>  Batch Review</div>
+   
+   <div>
+            <div id='container2'></div>
+   <button onClick={()=> generateQR(window.location.toString())} class="mt-8 text-black bg-orange-300 hover:bg-orange-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center "> Generate QR </button>
+   <button onClick={()=> download_image()} class="ml-6 text-black bg-orange-300 hover:bg-orange-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center "> Download QR Code </button> 
+ 
+         </div>
             {load && 
             <div class='flex flex-col bg-white '>
-            <div class='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>Batch {bdet.sku} : UPC {bdet.upc} </div> 
+            <div class='flex justify-left text-2xl font-medium text-black m-4 p-2'>Batch {bdet.sku} : UPC {bdet.upc} </div> 
+          
             <div class='text-3xl font-bold m-6 p-2 text-yellow-900'> Harvesting</div>   
             <ol class="relative border-l border-gray-200 dark:border-gray-700 shadow-lg border-yellow-900 border-2 p-4 pt-12 pb-12 rounded-xl">                  
                 <li class="mb-10 ml-6">            

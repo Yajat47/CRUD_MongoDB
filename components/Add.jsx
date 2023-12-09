@@ -1,6 +1,7 @@
 'use client'
 import { useState , useEffect  } from "react";
 import Upload from "./Upload";
+import Navbar from "components/Navbar";
 
 
 
@@ -95,43 +96,51 @@ const Add = () => {
 
     return ( 
         <div>
+          <Navbar/>
             { au &&
+
             <form class="formren" className='mt-8 p-6 text-lg '>
-            <div className='text-xl font-bold m-6 p-2 text-purple-700'> Add a new Batch</div>
-            <div className='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>Batch Details</div>
-                <div className='flex justify-center '>
-                <label className='text-lg font-medium ' for="upc">Unique Product Code (UPC) :</label>
-                <input className='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="upc" id="upc" onChange={handleChange}  placeholder="UPC"></input>
+              <div class="grid gap-6 mb-6 grid-cols-1">
+               
+            <div className='flex  mb-2 mt-6 text-2xl font-bold text-yellow-900'> 
+            <svg onClick={()=> window.location.replace("/")} class="mr-6 w-6 h-8 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 5H1m0 0 4 4M1 5l4-4"></path>
+</svg> 
+            Add a new Batch</div>
+            {/* <div className='flex justify-left text-2xl font-bold text-yellow-900 m-4 p-2'>New Batch Details</div> */}
+                <div className=' '>
+                <label className='block mb-2 text-sm font-medium text-gray-900 ' for="upc">Unique Product Code (UPC) :</label>
+                <input className='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="upc" id="upc" onChange={handleChange}  placeholder="UPC"></input>
                 </div>
-                <div className='mt-8 flex justify-center '>
-                <label className='text-lg font-medium ' for="s_variety">Fertilizers and Soil Info :
+                <div className='mt-8 '>
+                <label className='block mb-2 text-sm font-medium text-gray-900 ' for="s_variety">Fertilizers and Soil Info :
                 </label>
-                <input className='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="s_variety" id="s_variety" onChange={handleChange} placeholder=" Variety"></input>
+                <input className='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="s_variety" id="s_variety" onChange={handleChange} placeholder=" Variety"></input>
                 </div>
-                <div className='mt-8 flex justify-center '>
-                <label className='text-lg font-medium ' for="temp">Temperature </label>
-                <input className='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="temp" id="temp" onChange={handleChange} placeholder=" Temperature"></input>
+                <div className='mt-8 '>
+                <label className='block mb-2 text-sm font-medium text-gray-900 ' for="temp">Temperature </label>
+                <input className='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="temp" id="temp" onChange={handleChange} placeholder=" Temperature"></input>
                 </div>
-                <div className='mt-8 flex justify-center '>
-                <label className='text-lg font-medium ' for="region">Region / Location </label>
-                <input className='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="region" id="region" onChange={handleChange} placeholder=" Locaction"></input>
+                <div className='mt-8  '>
+                <label className='block mb-2 text-sm font-medium text-gray-900 ' for="region">Region / Location </label>
+                <input className='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="region" id="region" onChange={handleChange} placeholder=" Locaction"></input>
                 </div>
                 
-                <div className='mt-8 flex justify-center '>
-                <label className='text-lg font-medium ' for="planter">Elevation  </label>
-                <input className='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="elevation" id="elevation" onChange={handleChange} placeholder=" Region"></input>
+                <div className='mt-8  '>
+                <label className='block mb-2 text-sm font-medium text-gray-900' for="planter">Elevation  </label>
+                <input className='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="elevation" id="elevation" onChange={handleChange} placeholder=" Region"></input>
                 </div>
-                <div className='mt-8 flex justify-center '>
-                <label className='text-lg font-medium ' for="planter">Harvesting Date  </label>
-                <input className='ml-6 border-2 border-purple-700 rounded-lg' type="date" name="date" id="date" onChange={handleChange} placeholder=" Harvesting Date"></input>
+                <div className='mt-8  '>
+                <label className='block mb-2 text-sm font-medium text-gray-900 ' for="planter">Harvesting Date  </label>
+                <input className='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="date" name="date" id="date" onChange={handleChange} placeholder=" Harvesting Date"></input>
                 </div>
-                <div className='mt-8 flex justify-center '>
-                <label className='text-lg font-medium ' for="planter">Flowering Date  </label>
-                <input className='ml-6 border-2 border-purple-700 rounded-lg' type="date" name="flowering" id="flowering" onChange={handleChange} placeholder=" Flowering Date"></input>
+                <div className='mt-8  '>
+                <label className='block mb-2 text-sm font-medium text-gray-900 ' for="planter">Flowering Date  </label>
+                <input className='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="date" name="flowering" id="flowering" onChange={handleChange} placeholder=" Flowering Date"></input>
                 </div>
 
                 
-                 <div className='mt-12 flex justify-center '>
+                 <div className='mt-12 flex justify-left '>
                 <Upload upimgs2={upimgs2} setupimgs2={setupimgs2}/>
                 </div> 
                 <br />
@@ -147,8 +156,9 @@ const Add = () => {
                 </div>
             </div> }
                 { !isl &&
-                <button className='bg-purple-700 m-6 p-2  w-36 text-lg font-semibold text-white rounded-lg' onClick={(e)=>checkIfWalletIsConnected(e)} >Submit Batch </button>
+                <button className='text-white bg-yellow-900 hover:bg-yellow-800 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2' onClick={(e)=>checkIfWalletIsConnected(e)} >Submit Batch </button>
               }
+                </div>
                 </div>
             </form>
 }

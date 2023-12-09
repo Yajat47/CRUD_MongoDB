@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/Harvest.jsx"  ],
   "exclude": [
     "node_modules"
   ]

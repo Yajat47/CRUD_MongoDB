@@ -47,18 +47,20 @@ function Upload({ upimgs2 , setupimgs2 }) {
     <div> 
          
           <div class='m-6 p-4 bg-gray-100 rounded-xl '> 
-              <h3 class='text-lg font-semibold text-orange-900'> Upload Images</h3>
+              <h3 class='block mb-2 text-sm font-medium text-gray-900'> Upload Images</h3>
               <div class='m-4 p-2 border-lg border-orange-950 bg-white  flex justify-center'>
                 <input type="file" 
+                className='block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50'
                 onChange ={(event) => {setUploadFile(event.target.files[0]);}} 
               />
+                 <button class='ml-2 font-medium rounded-full text-sm px-2.5 py-0 text-center me-2 mb-2 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300' onClick = {handleUpload}> Upload </button>
+
               </div>
-             <button class='bg-purple-700 p-2 text-white rounded-xl' onClick = {handleUpload}> Upload File</button>
              {/* <button class='bg-purple-700 p-2 text-white rounded-xl' onClick = {trimurl}> LOG URLS</button> */}
 
 
              <div className="right-side">
-          <h3 class='m-6 p-4 '>Uploaded Images</h3>
+          <h3 class='block mb-2 text-sm font-sm text-gray-900 rounded-xl '>Uploaded Images</h3>
           <div class='flex flex-row'>
           { upimgs.map((i , index)=>(
                 <div class='p-2 w-1/4 h-1/4 shadow-xl shadow-gray-300' key={index}>{i && ( <img src={i} /> )}</div>

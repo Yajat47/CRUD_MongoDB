@@ -1,6 +1,7 @@
 'use client'
 
 import Upload from 'components/Upload';
+import Navbar from 'components/Navbar';
 import { useState , useEffect } from 'react';
 const Process = () => {
     // const [isWalletConnected, setIsWalletConnected] = useState(false);
@@ -84,52 +85,56 @@ try {
 
     return ( 
         <div>
-            <div class='text-xl font-bold m-6 p-2 text-purple-700'>Processing</div>
-            <div class='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>Batch Details</div>
+          <Navbar/>
+            <div class='flex mb-2 mt-20 text-2xl font-bold text-yellow-900'><svg onClick={()=> window.location.replace("/")} class="mr-6 w-6 h-8 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 5H1m0 0 4 4M1 5l4-4"></path>
+</svg> Processing</div>
+           
             <form className="formren" class='mt-8 p-6 text-lg '>
-                <div class='flex justify-center '>
-                <label class='text-lg font-medium ' for="upc">SKU (Index) : </label>
-                <input disabled={true} class='ml-6 border-2 border-purple-700 rounded-lg' value={sku} type="text" name="upc" id="upc" onChange={handleChange}  placeholder="UPC"></input>
+            <div class="grid gap-6 mb-6 grid-cols-1">
+                <div >
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="upc">SKU (Index) : </label>
+                <input disabled={true} className='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' value={sku} type="text" name="upc" id="upc" onChange={handleChange}  placeholder="UPC"></input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="p_ptype">Process Type
+                <div className='mt-8'>
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="p_ptype">Process Type
                 </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="p_ptype" id="p_ptype" onChange={handleChange} placeholder=" Process Type">
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="p_ptype" id="p_ptype" onChange={handleChange} placeholder=" Process Type">
                 </input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="p_params">Process Parameters </label>
+                <div className='mt-8'>
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="p_params">Process Parameters </label>
                 <input onChange={handleChange} id="p_params" name="p_params" type="text" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Processing Parameters....."></input>
 
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="p_pulpdate">Pulping Date </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="date" name="p_pulpdate" id="p_pulpdate" onChange={handleChange} placeholder=" Pulping Date"></input>
+                <div className='mt-8'>
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="p_pulpdate">Pulping Date </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="date" name="p_pulpdate" id="p_pulpdate" onChange={handleChange} placeholder=" Pulping Date"></input>
                 </div>
     
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="p_dtabledate">Drying Table Start Date  </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="date" name="p_dtabledate" id="p_dtabledate" onChange={handleChange} placeholder=" Date"></input>
+                <div className='mt-8'>
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="p_dtabledate">Drying Table Start Date  </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="date" name="p_dtabledate" id="p_dtabledate" onChange={handleChange} placeholder=" Date"></input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="p_dcompdate">Drying Table Complete Date </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="date" name="p_dcompdate" id="p_dcompdate" onChange={handleChange} placeholder=" Drying Complete Date"></input>
+                <div className='mt-8'>
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="p_dcompdate">Drying Table Complete Date </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="date" name="p_dcompdate" id="p_dcompdate" onChange={handleChange} placeholder=" Drying Complete Date"></input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="p_dparams">Drying Table Parameters  </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="p_dparams" id="p_dparams" onChange={handleChange} placeholder=" Drying Table Parmameters Info"></input>
+                <div className='mt-8'>
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="p_dparams">Drying Table Parameters  </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="p_dparams" id="p_dparams" onChange={handleChange} placeholder=" Drying Table Parmameters Info"></input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="p_bdate">Bagging Date  </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="date" name="p_bdate" id="p_bdate" onChange={handleChange} placeholder=" Bagging Date"></input>
+                <div className='mt-8'>
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="p_bdate">Bagging Date  </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="date" name="p_bdate" id="p_bdate" onChange={handleChange} placeholder=" Bagging Date"></input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="p_spackdate">Sample Packing Date  </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="date" name="p_spackdate" id="p_spackdate" onChange={handleChange} placeholder=" Sample Packaging Date"></input>
+                <div className='mt-8'>
+                <label class='block mb-2 text-sm font-medium text-gray-900 ' for="p_spackdate">Sample Packing Date  </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="date" name="p_spackdate" id="p_spackdate" onChange={handleChange} placeholder=" Sample Packaging Date"></input>
                 </div>
 
                 
-                <div class='mt-12 flex justify-center '>
+                <div class='mt-12 flex justify-left '>
                 <Upload upimgs2={upimgs2} setupimgs2={setupimgs2}/>
                 </div>
                 <br />
@@ -144,8 +149,9 @@ try {
                 </div>
             </div> }
                 { !isl &&
-                <button className='bg-purple-700 m-6 p-2  w-36 text-lg font-semibold text-white rounded-lg' onClick={(e)=>checkIfWalletIsConnected(e)} >Submit Process </button>
+                <button className='text-white bg-yellow-900 hover:bg-yellow-800 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2' onClick={(e)=>checkIfWalletIsConnected(e)} >Submit Process </button>
               }
+                </div>
                 </div>
             </form>
             </div>

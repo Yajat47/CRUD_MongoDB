@@ -3,13 +3,22 @@
 import { useState , useEffect } from "react";
 import Landing from "components/Landing.jsx"
 import Harvest from "components/Harvest.jsx";
+import Process from "components/Process.jsx";
+import Hulling from "components/Hulling.jsx";
+import Roasting from "components/Roasting.jsx";
+import Packaging from "components/Packaging.jsx";
+
+
+
 
 
 const Batch = () => {
     const [load , setload] = useState(false);
     const [sku , setsku] = useState(0);
     const [stage , setstage] = useState(0);
-    const [au , setau] = useState(false);
+   const [step , setstep] = useState(0);
+   const [isb , setb] = useState(false);
+
     // useEffect(() => {
     //   const isAuth = sessionStorage.getItem("user");
     //   if(!isAuth){
@@ -19,6 +28,34 @@ const Batch = () => {
     //     setau(true);
     //   }
     // }, []);
+
+    useEffect(()=>{
+      switch (bdet["itemState"]) {
+        case "Harvested":
+          
+            setstep(1);
+          break;
+        case "Processing":
+           
+            setstep(2);
+          break;
+        case "Hulling":
+           
+           setstep(3);
+          break;
+        case "Roasting":
+           
+            setstep(4);
+          break;
+        case "Packaging":
+           
+            setstep(5);
+          break;              
+      
+        default:
+          break;
+      }
+    },[load]);
 
     const [bdet, setdet] = useState(
         {
@@ -73,9 +110,17 @@ const Batch = () => {
         },
         body: JSON.stringify({ p   }),
       }).then(res => res.json()).then((data)=> setdet(data)).then(()=> setload(true))
+
+
          //   setload(true)
            
+      //    const items2 =  bdet["s_imgs"].map((e,index)=> {  
+      //     let s = "https://res.cloudinary.com/dxbzcfalw/image/upload/"+e.toString();
+      //     console.log(s);
+      //   <img src={s} onDragStart={handleDragStart} role="presentation" className='h-[353px]' width={390} height={353} alt='' key={index}  />
+      // });
 
+   //   setitems(items2);
            
 
 
@@ -105,7 +150,19 @@ const Batch = () => {
             }
 
           {
-            stage == 1 && <Harvest bdet= {bdet} setstage = {setstage} />
+            stage == 1 &&  <Harvest bdet= {bdet} setstage = {setstage} step={step}  />
+          }
+          {
+            stage ==2 && step >= 2 && <Process bdet = {bdet} setstage = {setstage} step={step} />
+          }
+          {
+            stage == 3 && step >=3 && <Hulling bdet = {bdet} setstage = {setstage} step={step} />
+          }
+          {
+            stage == 4 && step >=4 && <Roasting bdet = {bdet} setstage = {setstage} step={step} />
+          }
+          {
+            stage == 5 && step ==5 && <Packaging bdet = {bdet} setstage = {setstage} step={step} />
           }
         
           </div>

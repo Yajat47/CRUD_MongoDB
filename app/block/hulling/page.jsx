@@ -1,8 +1,8 @@
 'use client'
 import { useState , useEffect } from "react";
 import abi from "contracts/Coffee2.json";
-import { ethers   } from "ethers";
-
+import { N, ethers   } from "ethers";
+import Navbar from "components/Navbar";
 
 
 
@@ -97,32 +97,35 @@ const BHulling = () => {
 
     return ( 
         <div>
-            <div class='text-xl font-bold m-6 p-2 text-purple-700'>Hulling</div>
-            <div class='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>Hulling Details</div>
-            <form className="formren" class='mt-8 p-6 text-lg '>
-                <div class='flex justify-center '>
-                <label class='text-lg font-medium ' for="upc">SKU (Index) : </label>
-                <input disabled={true} class='ml-6 border-2 border-purple-700 rounded-lg' value={sku} type="text" name="upc" id="upc" onChange={handleChange}  placeholder="UPC"></input>
+          <Navbar/>
+          <div className='flex  mb-2 mt-24 text-2xl font-bold text-yellow-900'> 
+            <svg onClick={()=> window.location.replace("/block/home")} class="mr-6 w-6 h-8 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 5H1m0 0 4 4M1 5l4-4"></path>
+</svg> Hulling</div>
+            <form className="formren" class='mt-12 p-6 text-lg '>
+                <div >
+                <label class='block mb-2 text-sm font-medium text-gray-900' for="upc">SKU (Index) : </label>
+                <input disabled={true} class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' value={sku} type="text" name="upc" id="upc" onChange={handleChange}  placeholder="UPC"></input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="h_resttime">Hulling Rest Time
+                <div className="mt-8">
+                <label class='block mb-2 text-sm font-medium text-gray-900' for="h_resttime">Hulling Rest Time
                 </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="h_resttime" id="h_resttime" onChange={handleChange} placeholder=" Rest Time (in Days)">
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="h_resttime" id="h_resttime" onChange={handleChange} placeholder=" Rest Time (in Days)">
                 </input>
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="h_startdate">Hulling Start Date </label>
-                <input onChange={handleChange} id="h_startdate" name="h_startdate" type="date" class="block p-4 m-6 w-fit text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" ></input>
+                <div className="mt-8">
+                <label class='block mb-2 text-sm font-medium text-gray-900' for="h_startdate">Hulling Start Date </label>
+                <input onChange={handleChange} id="h_startdate" name="h_startdate" type="date" class="block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500" ></input>
 
                 </div>
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="h_gradesize">Grade Size </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="h_gradesize" id="h_gradesize" onChange={handleChange} placeholder="Hulling Grade Size"></input>
+                <div className="mt-8">
+                <label class='block mb-2 text-sm font-medium text-gray-900' for="h_gradesize">Grade Size </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="h_gradesize" id="h_gradesize" onChange={handleChange} placeholder="Hulling Grade Size"></input>
                 </div>
     
-                <div class='mt-8 flex justify-center '>
-                <label class='text-lg font-medium ' for="h_baggingdetails">Bagging Details  </label>
-                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="h_baggingdetails" id="h_baggingdetails" onChange={handleChange} placeholder="Baggiing Details (60 Characters Limit)"></input>
+                <div className="mt-8">
+                <label class='block mb-2 text-sm font-medium text-gray-900' for="h_baggingdetails">Bagging Details  </label>
+                <input class='block w-full p-4 text-gray-900 border text-sm border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500' type="text" name="h_baggingdetails" id="h_baggingdetails" onChange={handleChange} placeholder="Baggiing Details (60 Characters Limit)"></input>
                 </div>
             
 
@@ -136,7 +139,7 @@ const BHulling = () => {
                 </div>
             </div> }
                 { !isl &&
-                <button className='bg-purple-700 m-6 p-2  w-36 text-lg font-semibold text-white rounded-lg' onClick={(e)=>checkIfWalletIsConnected(e)} >Submit Hulling </button>
+                <button className='text-white bg-yellow-900 hover:bg-yellow-800 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2' onClick={(e)=>checkIfWalletIsConnected(e)} >Submit Hulling </button>
               }                </div>
             </form>
             </div>

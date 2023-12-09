@@ -13,3 +13,15 @@ export async function POST(request) {
   return NextResponse.json({ message: "Batch Added" }, { status: 200 });
 }
 
+export async function PUT(request) {
+  const { sku  } = await request.json();
+  await connectMongoDB();
+  const res = await block.findOne({ sku : sku });
+  if(res){
+  return NextResponse.json({ res  }, { status: 200 });
+  }
+  else {
+    return NextResponse.json({ message: "Batch NOT Found" }, { status: 400 });
+
+  }
+}

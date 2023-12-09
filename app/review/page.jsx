@@ -2,6 +2,7 @@
 
 import { useState , useEffect } from "react";
 import QRCode from "qrcode";
+import Navbar from "components/Navbar";
 
 
 
@@ -23,6 +24,8 @@ const Review = () => {
       else {
         setau(true);
       }
+
+    
     }, []);
     const [bdet, setdet] = useState(
         {
@@ -78,45 +81,6 @@ const Review = () => {
         body: JSON.stringify({ p   }),
       }).then(res => res.json()).then((data)=> setdet(data))
 
-    //   if (!res.ok) {
-    //     throw new Error("Failed ");
-    //   }  
-
-     
-        //     setdet(
-        //         {
-        //             sku:result[0][0],                    // Stock Keeping Unit (SKU)
-        //             upc:ethers.decodeBytes32String(result[1][0]).toString(),                  
-        //            pAdd:result[2][0], 
-        //              itemState:state, 
-        //             s_variety :ethers.decodeBytes32String(result[4][0]).toString(),
-        //            s_temp :ethers.decodeBytes32String(result[5][0]).toString(),
-        //             s_region :ethers.decodeBytes32String(result[6][0]).toString(),
-        //            s_elevation:ethers.decodeBytes32String(result[7][0]).toString(),
-        //            s_flowering:ethers.decodeBytes32String(result[8][0]).toString(),
-        //            s_soiltype :result[9][0],
-        //            s_imgs :result[10].toString().split(","),
-        //            s_date:ethers.decodeBytes32String(result[11][0]).toString(),
-        //            p_ptype:ethers.decodeBytes32String(result[12][0]).toString(),
-        //            p_params:result[13].toString().split(","),
-        //            p_pulpdate:ethers.decodeBytes32String(result[14][0]).toString(),
-        //            p_dtabledate:ethers.decodeBytes32String(result[15][0]).toString(),
-        //            p_dcompdate:ethers.decodeBytes32String(result[16][0]).toString(),
-        //            p_dparams:ethers.decodeBytes32String(result[17][0]).toString(),
-        //            p_bdate:ethers.decodeBytes32String(result[18][0]).toString(),
-        //            p_spackdate:ethers.decodeBytes32String(result[19][0]).toString(),
-        //            p_imgs:result[20].toString().split(","),
-        //            h_resttime:ethers.decodeBytes32String(result[21][0]).toString(),
-        //    // :TODO        h_startdate:ethers.decodeBytes32String(result[22][0]).toString(),
-        //            h_gradesize:ethers.decodeBytes32String(result[23][0]).toString(),
-        //            h_baggingdetails:ethers.decodeBytes32String(result[24][0]).toString(),
-        //            r_date:ethers.decodeBytes32String(result[25][0]),
-        //            r_degasstime:ethers.decodeBytes32String(result[26][0]),
-        //            r_flavourp:ethers.decodeBytes32String(result[27][0]),
-        //            r_imgs:result[28].toString().split(","),
-        //            m_date:ethers.decodeBytes32String(result[29][0]),
-        //               }
-        //     );
 
            // setbatch(sts);
             setload(true);
@@ -135,6 +99,37 @@ const Review = () => {
         }
       }
 
+      const deltebatch = async (e)=> {
+     e.preventDefault();
+     if(window.confirm("Warning!, this action will delete the batch...")){
+        try {
+
+            const params = new URLSearchParams(window.location.search); 
+            let p = params.get('id');
+          
+        fetch(window.location.protocol + '//' + window.location.hostname +":"  + window.location.port+'/api/deletebatch', {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ p }),
+      }).then(res => window.alert("Batch Deleted")).then((data)=> window.location.replace("/") )
+
+
+           
+
+
+
+
+    
+          
+        } 
+        catch (err) {
+          console.log(err);
+        }
+    }
+      }
+
       let opts = {
         errorCorrectionLevel: 'H',
         type: 'image/jpeg',
@@ -148,14 +143,25 @@ const Review = () => {
       
       
 
-      const generateQR = async text => {
+      function download_image(){
+        var canvas = document.querySelector("canvas");
+        let image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        var link = document.createElement('a');
+        link.download = "Skia-B"+sku.toString()+".png";
+        link.href = image;
+        link.click();
+      }
+
+    const generateQR = async text => {
         try {
         //  console.log(await QRCode.toDataURL('test'))
-        QRCode.toCanvas('text', { errorCorrectionLevel: 'H' }, function (err, canvas) {
+        //const t2 = text.replace("/block","");
+        QRCode.toCanvas(text.replace("review","track"), { errorCorrectionLevel: 'H' , width : 800 }, function (err, canvas) {
             if (err) throw err
           
-            var container = document.getElementById('container')
+            var container = document.getElementById('container2')
             container.appendChild(canvas)
+    
           })
         } catch (err) {
           console.error(err)
@@ -170,13 +176,26 @@ const Review = () => {
 
     return ( 
         <div class=''>
-            <div class='text-3xl font-bold m-6 p-2 text-purple-700'> Batch Review</div>
+            <Navbar/>
+            <div className='flex  mb-2 mt-24 text-2xl font-bold text-yellow-900'> 
+               <svg onClick={()=> window.location.replace("/")} class="mr-6 w-6 h-8 text-gray-500 hover:text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 5H1m0 0 4 4M1 5l4-4"></path>
+   </svg>  Batch Review</div>
+   
+   <div>
+            <div id='container2'></div>
+   <button onClick={()=> generateQR(window.location.toString())} class="mt-8 text-black bg-orange-300 hover:bg-orange-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center "> Generate QR </button>
+   <button onClick={()=> download_image()} class="ml-6 text-black bg-orange-300 hover:bg-orange-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center "> Download QR Code </button> 
+   <button onClick={(e)=> deltebatch(e)} class="ml-6 text-black bg-orange-300 hover:bg-orange-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center "> Delete Batch! </button> 
+ 
 
-            <div id='container'></div>
+   
+
+ 
+         </div>
             {load && 
             <div class='flex flex-col bg-white '>
-            <div class='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>Batch {bdet.sku} : UPC {bdet.upc} </div>
-            <button onClick={()=> generateQR('yes')} class="ml-8 w-fit  rounded-xl bg-orange-300 px-4 py-2 hover:bg-gray-100 "> Generate QR </button> 
+            <div class='flex justify-left text-2xl font-semibold text-yellow-900 m-4 mt-12 p-2'>Batch {bdet.sku} : UPC {bdet.upc} </div>
             <div class='text-3xl font-bold m-6 p-2 text-yellow-900'> Harvesting</div>   
             <ol class="relative border-l border-gray-200 dark:border-gray-700 shadow-lg border-yellow-900 border-2 p-4 pt-12 pb-12 rounded-xl">                  
                 <li class="mb-10 ml-6">            
