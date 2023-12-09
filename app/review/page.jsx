@@ -156,7 +156,7 @@ const Review = () => {
         try {
         //  console.log(await QRCode.toDataURL('test'))
         //const t2 = text.replace("/block","");
-        QRCode.toCanvas(text.replace("review","track"), { errorCorrectionLevel: 'H' , width : 800 }, function (err, canvas) {
+        QRCode.toCanvas(text.replace("review","batch"), { errorCorrectionLevel: 'H' , width : 800 }, function (err, canvas) {
             if (err) throw err
           
             var container = document.getElementById('container2')
