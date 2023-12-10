@@ -13,9 +13,9 @@ export default function RootLayout({ children }) {
   return (
    <html lang="en">
       <body >
-        <div className="max-w-3xl mx-auto p-4">
+        <div className="max-w-3xl  lg:mx-auto md:mx-auto  lg:p-4 md:p-4">
           {/* <Navbar /> */}
-          <div className="mt-8">{children}</div>
+          <div className="lg:mt-8 md:mt-8">{children}</div>
         </div>
       </body></html>
     

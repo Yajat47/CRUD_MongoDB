@@ -43,9 +43,9 @@ const Harvest = ({bdet , setstage ,step , burls , isb }) => {
      ];
 
     return ( 
-        <div className="w-[393px] h-[1163px] relative bg-neutral-100 font-heading">
-    <div className="w-[393px] h-[349px] left-0 top-0 absolute bg-black bg-opacity-70" />
-    <div className="w-[393px] h-[73px] left-0 top-[349px] absolute bg-yellow-950" />
+        <div className="w-full h-[1163px] relative bg-neutral-100 font-heading">
+    <div className="w-full h-[349px] left-0 top-0 absolute bg-black bg-opacity-70" />
+    <div className="w-full h-[73px] left-0 top-[349px] absolute bg-yellow-950" />
     
     
    <div className='flex flex-col justify-center h-[353px]'>
@@ -73,7 +73,7 @@ const Harvest = ({bdet , setstage ,step , burls , isb }) => {
     <div className="left-[160px] top-[581px] absolute text-neutral-600 text-sm font-normal ">{convertToDateString(bdet["s_flowering"])}</div>
     <div className="left-[160px] top-[613px] absolute text-neutral-600 text-sm font-normal ">{bdet["upc"]}</div>
     <div className="w-[360px] left-[16px] top-[685px] absolute text-neutral-600 text-sm font-light ">{bdet["s_variety"]}</div>
-    <div className="left-[235px] top-[376px] absolute text-zinc-200 text-base font-medium ">{ convertToDateString(bdet["s_date"]) }</div>
+    <div className="left-[200px] top-[376px] absolute text-zinc-200 text-base font-medium ">{ convertToDateString(bdet["s_date"]) }</div>
 
 
   
@@ -91,7 +91,7 @@ const Harvest = ({bdet , setstage ,step , burls , isb }) => {
       
 
     
-    <div onClick={()=> step>=2 ? setstage(2) : setstage(0) } className="w-15 h-fit p-[8px] left-[340px] top-[600px] fixed bg-yellow-950 rounded-full ">
+    <div onClick={()=> step>=2 ? setstage(2) : setstage(0) } className="w-15 h-fit p-[8px] left-[310px] top-[600px] fixed bg-yellow-950 rounded-full ">
         <span className='text-white '>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />

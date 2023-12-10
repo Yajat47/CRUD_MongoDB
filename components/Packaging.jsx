@@ -56,7 +56,7 @@ const Packaging = ({bdet , setstage ,burls , isb}) => {
         <div className="left-[16px] top-[482px] absolute text-black text-base font-semibold font-['Poppins']">Product Code:</div>
         <div className="left-[16px] top-[444px] absolute text-yellow-950 text-xl font-bold font-['Poppins']">Specifications :</div>
         <div className="left-[168px] top-[483px] absolute text-neutral-600 text-sm font-normal font-['Poppins']">{bdet["upc"]}</div>
-        <div className="left-[235px] top-[376px] absolute text-zinc-200 text-base font-medium font-['Poppins']">{convertToDateString(bdet["m_date"])}</div>
+        <div className="left-[200px] top-[376px] absolute text-zinc-200 text-base font-medium font-['Poppins']">{convertToDateString(bdet["m_date"])}</div>
         
         <div className="left-[16px] top-[528px] absolute text-yellow-950 text-xl font-bold font-['Poppins']">Brewing:</div>
         <div className="w-[360px] left-[16px] top-[573px] absolute text-neutral-600 text-sm font-light font-['Poppins']">{bdet["brewing"]}</div>
@@ -71,7 +71,7 @@ const Packaging = ({bdet , setstage ,burls , isb}) => {
  
 
    
-    <div onClick={()=>setstage(0)} className="w-15 h-fit p-[8px] left-[340px] top-[600px] fixed bg-yellow-950 rounded-full ">
+    <div onClick={()=>setstage(0)} className="w-15 h-fit p-[8px] left-[310px] top-[600px] fixed bg-yellow-950 rounded-full ">
         <span className='text-white '>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />

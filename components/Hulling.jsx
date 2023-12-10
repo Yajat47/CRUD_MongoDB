@@ -56,7 +56,7 @@ const Hulling = ({bdet , setstage , step , burls , isb}) => {
         <div className="left-[167px] top-[517px] absolute text-neutral-600 text-sm font-normal font-['Poppins']">{bdet["h_resttime"]}</div>
         <div className="left-[166px] top-[549px] absolute text-neutral-600 text-sm font-normal font-['Poppins']">{bdet["h_gradesize"]}</div>
         <div className="left-[164px] top-[583px] absolute text-neutral-600 text-sm font-normal font-['Poppins']">{bdet["h_baggingdetails"]}</div>
-        <div className="left-[235px] top-[376px] absolute text-zinc-200 text-base font-medium font-['Poppins']">{convertToDateString(bdet["h_startdate"])}</div>
+        <div className="left-[200px] top-[376px] absolute text-zinc-200 text-base font-medium font-['Poppins']">{convertToDateString(bdet["h_startdate"])}</div>
        
     <div onClick={()=> setstage(2)} className="w-15 h-fit p-[8px] left-[16px] top-[32px] absolute bg-yellow-950 rounded-full">
     <span className='text-white '>
@@ -68,7 +68,7 @@ const Hulling = ({bdet , setstage , step , burls , isb}) => {
     
 
      
-    <div onClick={()=> step>=4 ? setstage(4) : setstage(0)} className="w-15 h-fit p-[8px] left-[340px] top-[600px] fixed bg-yellow-950 rounded-full ">
+    <div onClick={()=> step>=4 ? setstage(4) : setstage(0)} className="w-15 h-fit p-[8px] left-[310px] top-[600px] fixed bg-yellow-950 rounded-full ">
         <span className='text-white '>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
